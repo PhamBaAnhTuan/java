@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Employee</title>
+</head>
+<body>
+<h1>Add Employee</h1>
+<form th:action="@{/employee/add}" th:object="${employee}" method="post">
+  <div>
+    <label for="name">Name:</label>
+    <input type="text" id="name" th:field="*{name}" required />
+  </div>
+  <div>
+    <button type="submit">Add</button>
+  </div>
+</form>
+<a href="/employees">Back to Employee List</a>
+</body>
+</html>

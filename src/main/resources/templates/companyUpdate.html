@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Update Company</title>
+  <style>
+    form{
+      margin-left: auto;
+      margin-right: auto;
+      width: 50%;
+      justify-content: center;
+      flex-direction: column;
+    }
+  </style>
+</head>
+<body>
+<h1 style="text-align: center">Update Company</h1>
+
+<form th:action="@{'/company/update/' + ${company.id}}" th:object="${company}" method="POST">
+  <label for="firstName">Company Name:</label>
+  <input type="text" id="firstName" th:field="*{name}" required />
+
+  <div style="width: 500px">
+    <label for="users">Select Users:</label>
+    <select id="users" th:field="*{users}" multiple="multiple">
+      <option th:each="user : ${users}" th:value="${user.id}" th:text="${user.name}"></option>
+    </select>
+  </div>
+
+    <table>
+      <tr>
+        <th>User Id</th>
+        <th>User Name</th>
+      </tr>
+      <tr th:each="user : ${company.getUsers()}">
+        <td th:text="${user.id}"></td>
+        <td th:text="${user.getFirstName()}"></td>
+      </tr>
+    </table>
+
+  <button type="submit" style="width: 100px;">Update Company</button>
+</form>
+</body>
+</html>

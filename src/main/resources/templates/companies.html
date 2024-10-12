@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Company List</title>
+    <style>
+        table {
+            margin-left: auto;
+            margin-right: auto;
+            border-color: green;
+            flex: 1;
+            width: 75%;
+        }
+    </style>
+</head>
+<body>
+<table border="1"  style="align-items: center">
+    <tr>
+        <th>Id</th>
+        <th>Company Name</th>
+        <th>User</th>
+    </tr>
+    <tr th:each="company : ${companies}">
+        <td th:text="${company.id}"></td>
+        <td th:text="${company.getName()}"></td>
+        <td>
+            <table>
+                <tr>
+                    <th>User Id</th>
+                    <th>User Name</th>
+                </tr>
+                <tr th:each="user : ${company.getUsers()}">
+                    <td th:text="${user.id}"></td>
+                    <td th:text="${user.getFirstName()}"></td>
+                </tr>
+            </table>
+        </td>
+        <td style="width: 15%">
+            <a th:href="@{/company/update/{id}(id=${company.id})}" style="margin-right: 10px;">Update</a>
+
+            <form th:action="@{/company/delete/{id}(id=${company.id})}" method="POST" style="display: inline;">
+                <button type="submit" onclick="return confirm('Are you sure you want to delete this company?');">Delete</button>
+            </form>
+        </td>
+    </tr>
+</table>
+<button type="submit" style="margin-left: 200px; margin-top: 10px">
+    <a href="/companyAdd" class="btn btn-primary">Add Company</a>
+</button>
+
+<button type="submit" style="margin-left: 200px; margin-top: 10px">
+    <a href="/userAdd" class="btn btn-primary">Add User</a>
+</button>
+</body>
+</html>

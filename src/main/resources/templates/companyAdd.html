@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Add Company</title>
+  <meta charset="UTF-8">
+</head>
+<body>
+<h1>Add a New Company</h1>
+
+<form th:action="@{/companyAdd}" th:object="${company}" method="post">
+  <div>
+    <label for="name">Company Name:</label>
+    <input type="text" id="name" th:field="*{name}" placeholder="Enter company name" required />
+  </div>
+
+  <label for="users">Select Employee:</label>
+  <select id="users" th:field="*{employee}" multiple="multiple">
+    <option th:each="employee : ${employee}"
+            th:value="${employee.id}"
+            th:text="${employee.name}"
+            th:selected="${company.employee.contains(employee)}">
+    </option>
+  </select>
+
+  <div>
+    <button type="submit">Add Company</button>
+  </div>
+</form>
+
+<div>
+  <a th:href="@{/companies}">Back to Company List</a>
+</div>
+</body>
+</html>
